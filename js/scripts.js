@@ -8,14 +8,12 @@ function Ticket(movieTitle, movieTime, isASenior, numberOfTickets) {
 Ticket.prototype.getPrice = function() {
   var price = 15;
   if (this.isASenior === "true") {
-    console.log("senior");
     price -= 4;
   }
   if (this.movieTime <= 16) {
     price -=4;
   }
 
-  console.log(this.numberOfTickets);
   price *= parseInt(this.numberOfTickets);
   return price;
 }
@@ -29,9 +27,13 @@ $(document).ready(function() {
     var inputtedIsASenior = $("#is-a-senior").val();
     var newTicket = new Ticket(inputtedMovieTitle, inputtedMovieTime, inputtedIsASenior, inputtedNumberOfTickets);
 
-
-  $("#show-purchase span").text(newTicket.getPrice());
-
-
+  
+  $("#show-purchase").append("<div class='new-purchase'> " +
+                                "<h2>" + newTicket.movieTitle + "</h2>" +
+                                "<p> Time: " + newTicket.movieTime + ":00</p>" +
+                                "<p>Tickets: " + newTicket.numberOfTickets + "</p>" +
+                                "<p>Total: $" + newTicket.getPrice() + "</p>" +
+                             "</div>");
   });
+
 });
